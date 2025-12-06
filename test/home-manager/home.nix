@@ -124,6 +124,14 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Plaznum";
+        email = "rycs1997@gmail.com";
+      };
+    };
+  };
   systemd.user.startServices = "sd-switch";
 }
