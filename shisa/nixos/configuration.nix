@@ -7,7 +7,7 @@
     ./netdrives.nix
     ./packages.nix
     ./vim.nix
-    ./vm.nix
+#    ./vm.nix
   ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

@@ -8,45 +8,26 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.supportedFilesystems = [ "ntfs" "nfs"];
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/64456cb5-b9e8-4883-a2c8-0e4bb4fd3070";
+    { device = "/dev/disk/by-uuid/15f675c7-bf42-48b8-8f8e-d06acc052372";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6ED4-3934";
+    { device = "/dev/disk/by-uuid/08C9-EB5D";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
-
-  fileSystems."/run/media/pandy/BigSSD" =
-    { device = "/dev/disk/by-uuid/4AD08239D0822AF1";
-      fsType = "ntfs";
-      options = [ "rw" "uid=1000"];
+  fileSystems."/mnt/BigSSD" =
+    { device = "/dev/disk/by-uuid/376dd1cb-5286-4081-b1f1-993df70f92a8";
+      fsType = "ext4";
     };
 
-  # optional, but ensures rpc-statsd is running for on demand mounting
-#  fileSystems."/run/media/pandy/SlowSmallSSD" =
-#    { device = "/dev/disk/by-uuid/8C9055BB9055AC88";
-#      fsType = "ntfs-3g";
-#      options = [ "rw" "uid=1000"];
-#    };
-#fileSystems."/home/pandy/mnt" = {
-#  device = "pandy@192.168.1.96:/";
-#  fsType = "sshfs";
-#  options = [
-#    "nodev"
-#    "noatime"
-#    "allow_other"
-#    "IdentityFile=/home/pandy/.ssh/id_ed25519"
-#  ];
-#};
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -59,6 +40,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 }
