@@ -6,6 +6,7 @@
   nixpkgs.config.nvidia.acceptLicense = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-33.4.11"
+    "electron-36.9.5"
     "mbedtls-2.28.10"
   ];
 
@@ -152,6 +153,7 @@
     gnome-tweaks
     gnomeExtensions.appindicator
     greetd.tuigreet
+    gtk2
     hyfetch
     inetutils
     killall

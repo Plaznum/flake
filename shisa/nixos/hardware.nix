@@ -24,7 +24,7 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
   fileSystems."/mnt/BigSSD" =
-    { device = "/dev/disk/by-uuid/376dd1cb-5286-4081-b1f1-993df70f92a8";
+    { device = "/dev/disk/by-uuid/75d3967b-079d-4363-ae25-e95eb98e148b";
       fsType = "ext4";
     };
 
