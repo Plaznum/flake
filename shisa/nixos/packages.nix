@@ -186,7 +186,7 @@
     zip
 
 
-#    home-manager
+    home-manager
 #  environment.gnome.excludePackages = with pkgs; [
 #    # an attempt to stop keyring BS
 #    gnome-keyring
