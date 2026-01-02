@@ -26,10 +26,6 @@
     "gcadapter_oc"
   ];
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.networkmanager.enable = true;
   time.timeZone = "America/New_York";
@@ -55,20 +51,6 @@
 # Enable the X11 windowing system.
     enable = true;
     displayManager = {
- #     lightdm = {
- #       # enable = true;
- #       background = "/usr/bin/tHYJ136.jpg";
- #       greeters.gtk.extraConfig = 
- #       ''
- #         [Seat:*]
- #         greeter-setup-script=/usr/bin/greeter_monitor.sh
- #         xserver-command=X -s 0 -dpms
- #       '';
- #       greeter.enable = true;
- #       greeters.slick = { 
- #         enable = true;
- #       };
- #     };
       gdm = { 
         enable = true;
         wayland = true;
@@ -96,11 +78,9 @@
 
   services.udev.packages = with pkgs; [ 
     dolphin-emu
-    gnome-settings-daemon 
+    gnome-settings-daemon
   ];
   services.printing.enable = true;
-#  hardware.pulseaudio.enable = false;
-#  hardware.pulseaudio.support32Bit = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -163,17 +143,15 @@
 
    networking.firewall.allowedTCPPorts = [ 57621 ];
    networking.firewall.allowedUDPPorts = [ 5353 ];
-   #networking.firewall.enable = false;
-   #networking.firewall.checkReversePath = false;
 
    users.users.pandy = {
      isNormalUser = true;
      description = "Pandy!";
      extraGroups = [ "networkmanager" "wheel" "lovely" ];
    };
-  # NOPASSWD
+   # NOPASSWD
    security.sudo.wheelNeedsPassword = false;
    security.polkit.enable = true;
-  system.stateVersion = "24.05"; # Did you read the comment?
+   system.stateVersion = "24.05"; # Did you read the comment?
 
 }

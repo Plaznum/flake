@@ -184,13 +184,7 @@
     xsecurelock
     zenity
     zip
-
-
     home-manager
-#  environment.gnome.excludePackages = with pkgs; [
-#    # an attempt to stop keyring BS
-#    gnome-keyring
-#  ];
   ];
   programs = {
     firefox.enable = true;
@@ -215,9 +209,6 @@
         glib            # so gsettings works
         nautilus
         blueman
-      ];
-      extraOptions = [
-        "--unsupported-gpu"
       ];
     };
     light.enable = true;
