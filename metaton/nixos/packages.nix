@@ -62,18 +62,6 @@
       wineRelease = "staging";
       mingwSupport = true;
     }) 
-#    (retroarch.override {
-#      cores = with libretro; [
-#        desmume
-#        dolphin
-#        genesis-plus-gx
-#        pcsx2
-#	mgba
-#        snes9x
-#        beetle-psx-hw
-#        nestopia
-#      ];
-#    })
     ];
   };
 
@@ -85,14 +73,27 @@
   ];
 
   programs = {
-# Install firefox.
     firefox.enable = true;
     dconf.enable = true;
-    #hyprland.enable = true;
-    #hyprland.xwayland.enable = true;
     thunar.enable = true;
     appimage.binfmt = true;
-# sway.enable = true;
+    sway = {
+      enable = true;
+      xwayland.enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = with pkgs; [
+        grim            # screenshot functionality
+        libappindicator # enable tray maybe
+        slurp           # screenshot functionality
+        swaylock        # i3lock
+        wl-clipboard    # wl-copy and wl-paste for copy/paste from stdin / stdout
+        mako            # notification system developed by swaywm maintainer
+        wev
+        glib            # so gsettings works
+        nautilus
+        blueman
+      ];
+    };
     light.enable = true;
     steam = {
       enable = true;
@@ -111,26 +112,8 @@
 
   ];
 
-  # create link to path
   environment.pathsToLink = [ "/libexec" ];
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #These are all for Plasma6/KDE
-#    kdePackages.discover         # Optional: Install if you use Flatpak or fwupd firmware update sevice
-#    kdePackages.kcalc            # Calculator
-#    kdePackages.kcharselect      # Tool to select and copy special characters from all installed fonts
-#    kdePackages.kcolorchooser    # A small utility to select a color
-#    kdePackages.kolourpaint      # Easy-to-use paint program
-#    kdePackages.ksystemlog       # KDE SystemLog Application
-#    kdePackages.sddm-kcm         # Configuration module for SDDM
-#    kdiff3                       # Compares and merges 2 or 3 files or directories
-#    kdePackages.isoimagewriter   # Optional: Program to write hybrid ISO files onto USB disks
-#    kdePackages.partitionmanager # Optional Manage the disk devices, partitions and file systems on your computer
-#    hardinfo2                    # System information and benchmarks for Linux systems
-#    haruna                       # Open source video player built with Qt/QML and libmpv
-#    wayland-utils                # Wayland utilities
-#    wl-clipboard                 # Command-line copy/paste utilities for Wayland
     brightnessctl
     exiftool
     ffmpeg

@@ -12,7 +12,6 @@
     ./packages.nix
     ./work.nix
   ];
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   #boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -25,24 +24,14 @@
     config.boot.kernelPackages.gcadapter-oc-kmod
   ];
 
-  # to autoload at boot:
   boot.kernelModules = [ 
     "gcadapter_oc"
   ];
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable flakes!!
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -70,40 +59,8 @@
   services.xserver = {
 # Enable the X11 windowing system.
     enable = true;
-    displayManager = {
-##Graphical session to pre-select in the session chooser (only effective for GDM, LightDM and SDDM).
-##On GDM, LightDM and SDDM, it will also be used as a session for auto-login.
-##Set this option to empty string to get an error with a list of currently available sessions.
-#      lightdm = {
-#        # enable = true;
-#        background = "/usr/bin/tHYJ136.jpg";
-#        greeters.gtk.extraConfig = 
-#        ''
-#          [Seat:*]
-#          greeter-setup-script=/usr/bin/greeter_monitor.sh
-#          xserver-command=X -s 0 -dpms
-#        '';
-#        greeter.enable = true;
-#        greeters.slick = { 
-#          enable = true;
-#        };
-#      };
-#      gdm = { 
-#        enable = true;
-#        wayland = false;
-#        #wayland = true;
-#      };
-    };
-
     desktopManager = {
-#      gnome.enable = true;
-#      plasma6.enable = true;
       xterm.enable = false;
-#      xfce = {
-#        enable = true;
-#        noDesktop = true;
-#        enableXfwm = false;
-#      };
     };
     windowManager.i3 = {
       enable = true;
@@ -133,8 +90,6 @@
       ];
     };
 
-# Load nvidia driver for Xorg and Wayland
-#    videoDrivers = ["nvidia"];
 # Configure keymap in X11
     xkb = {
       layout = "us";
@@ -146,27 +101,8 @@
     dolphin-emu
   ];
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Enable shitty nvidia drivers
-  # Enable OpenGL
-#  hardware.graphics = {
-#    enable = true;
-#  };
-#
-#  hardware.nvidia = {
-#    # Modesetting is required.
-#    modesetting.enable = true;
-#    powerManagement.enable = false;
-#    powerManagement.finegrained = false;
-#    open = false;
-#    nvidiaSettings = true;
-#    package = config.boot.kernelPackages.nvidiaPackages.stable;
-#    #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-#  };
-
-  # Enable sound with pipewire.
+  services.libinput.enable = true;
   hardware.pulseaudio.enable = false;
 #  hardware.pulseaudio.support32Bit = true;
   hardware.bluetooth.enable = true;
@@ -183,14 +119,24 @@
     wireplumber.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-   services.libinput.enable = true;
-
-  # VIM setup!
-  environment.variables = { EDITOR = "vim"; };
-  # More shell stuff idk
-   environment.sessionVariables = {
-      NIX_SHELL_PRESERVE_PROMPT=1;
+   environment.variables = { 
+     EDITOR = "vim"; 
+     XSECURELOCK_PASSWORD_PROMPT = "asterisks";
+     # get themes working with sway...
+     QT_QPA_PLATFORMTHEME = "qt6ct";
+     CLUTTER_BACKEND = "wayland";
+     SDL_VIDEODRIVER = "wayland";
+     XDG_SESSION_TYPE = "wayland";
+     XDG_CURRENT_DESKTOP = "sway";
+     QT_QPA_PLATFORM = "wayland";
+     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+     MOZ_ENABLE_WAYLAND = "1";
+     _JAVA_AWT_WM_NONREPARENTING = "1";
+     ECORE_EVAS_ENGINE = "wayland_egl";
+     ELM_ENGINE = "wayland_egl";
+     #QT_STYLE_OVERRIDE = "adwaita-dark";
+     NIXOS_OZONE_WL = "1";
+     NIX_SHELL_PRESERVE_PROMPT= "1";
    };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -201,10 +147,8 @@
      enableSSHSupport = true;
    };
 
-  # Thunar addons
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.tumbler.enable = true; # Thumbnail support for images
-  # Enable the OpenSSH daemon.
+   services.gvfs.enable = true; # Mount, trash, and other functionalities
+   services.tumbler.enable = true; # Thumbnail support for images
    services.openssh.enable = true;
    services.openssh.settings.X11Forwarding = true;
    services.openssh.extraConfig = 
@@ -226,16 +170,6 @@
      description = "Pandy!";
      extraGroups = [ "networkmanager" "wheel" "lovely" ];
    };
-
-  # NOPASSWD
    security.sudo.wheelNeedsPassword = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
-
+   system.stateVersion = "24.05"; # Did you read the comment?
 }
