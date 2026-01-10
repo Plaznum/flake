@@ -14,9 +14,9 @@
 
   users.users.pandy = {
     packages = with pkgs; [
-#  (pkgs.writeShellScriptBin "Discord" ''
-#    exec ${pkgs.discord}/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-#  '')
+  (pkgs.writeShellScriptBin "Discord" ''
+    exec ${pkgs.discord}/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+  '')
 #  (pkgs.writeShellScriptBin "spotify" ''
 #    exec ${pkgs.spotify}/bin/spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
 #  '')
@@ -62,7 +62,6 @@
     telegram-desktop
     thunderbird
     uwsm
-    xdg-desktop-portal
     winetricks
     wireguard-tools
 #    cheese           # camera preview and taker
@@ -74,6 +73,9 @@
     ranger           # vim-like cli file explorer
     webcord
     wofi
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
 
     # i3
     #brightnessctl        # screen brightness contoller
@@ -210,6 +212,24 @@
         nautilus
         blueman
       ];
+      extraSessionCommands = ''
+        # get themes working with sway...
+        # custom theming
+        QT_QPA_PLATFORMTHEME = "qt6ct";
+        CLUTTER_BACKEND = "wayland";
+        SDL_VIDEODRIVER = "wayland";
+        XDG_SESSION_TYPE = "wayland";
+        XDG_CURRENT_DESKTOP = "sway";
+        QT_QPA_PLATFORM = "wayland";
+        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+        MOZ_ENABLE_WAYLAND = "1";
+        _JAVA_AWT_WM_NONREPARENTING = "1";
+        ECORE_EVAS_ENGINE = "wayland_egl";
+        ELM_ENGINE = "wayland_egl";
+        #QT_STYLE_OVERRIDE = "adwaita-dark";
+        NIXOS_OZONE_WL = "1";
+        NIX_SHELL_PRESERVE_PROMPT= "1";
+      '';
     };
     light.enable = true;
     steam = {

@@ -17,6 +17,9 @@ let
   thm_black4="#444a73";
 in
 {
+  imports = [
+#    ../sway.nix
+  ];
   home.username = "pandy";
   home.homeDirectory = "/home/pandy";
 
@@ -24,7 +27,6 @@ in
 
   home.packages = [
     pkgs.tmux
-
   ];
 
   home.file = {
@@ -51,9 +53,11 @@ in
     enableCompletion = true;
     bashrcExtra = ''
       PS1='\[\e[38;5;17;48;5;177;1m\]\u@\h:\[\e[0;38;5;177;48;5;17m\]\w\\$\[\e[0m\] '
-      alias hmswitch="home-manager switch --flake ~/flake/shisa/home-manager/"
-      alias rebuild="sudo nixos-rebuild switch --flake ~/flake/shisa/#shisa"
     '';
+    shellAliases = {
+      hmswitch = "home-manager switch --flake ~/flake/shisa/home-manager/";
+      rebuild = "sudo nixos-rebuild switch --flake ~/flake/shisa/#shisa";
+    };
   };
   programs.tmux = {
     enable = true;
@@ -135,7 +139,25 @@ in
       set shiftwidth=3 smarttab
       set expandtab
       set tabstop=8 softtabstop=0
+      set number relativenumber
+      set encoding=utf8
+      set mouse=a
+      set ruler
       let g:airline_theme = 'owo'
+      " highlight & increment searches
+      set incsearch
+      set hlsearch
+      " Autocomplete <ctrl + n> based on existing strings in document (i think)
+      set wildmode=longest,list,full
+      " Split screen open at bottom and right
+      set splitbelow splitright
+      " Split screen navigation shortcuts
+      map <C-h> <C-w>h
+      map <C-j> <C-w>j
+      map <C-k> <C-w>k
+      map <C-l> <C-w>l
+      " replace all alias to S
+      nnoremap S :%s//g<Left><Left>
     '';
   };
 

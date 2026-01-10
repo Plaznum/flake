@@ -101,23 +101,6 @@
      # VIM setup!
      EDITOR = "vim"; 
      XSECURELOCK_PASSWORD_PROMPT = "asterisks"; 
-
-     # get themes working with sway...
-     # custom theming
-     QT_QPA_PLATFORMTHEME = "qt6ct";
-     CLUTTER_BACKEND = "wayland";
-     SDL_VIDEODRIVER = "wayland";
-     XDG_SESSION_TYPE = "wayland";
-     XDG_CURRENT_DESKTOP = "sway";
-     QT_QPA_PLATFORM = "wayland";
-     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-     MOZ_ENABLE_WAYLAND = "1";
-     _JAVA_AWT_WM_NONREPARENTING = "1";
-     ECORE_EVAS_ENGINE = "wayland_egl";
-     ELM_ENGINE = "wayland_egl";
-     #QT_STYLE_OVERRIDE = "adwaita-dark";
-     NIXOS_OZONE_WL = "1";
-     NIX_SHELL_PRESERVE_PROMPT= "1";
    };
    programs.mtr.enable = true;
    programs.gnupg.agent = {
