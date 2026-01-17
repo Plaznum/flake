@@ -21,10 +21,16 @@
     config.boot.kernelPackages.gcadapter-oc-kmod
   ];
 
+  boot.initrd.kernelModules = [ "amdgpu" ];
   # to autoload at boot:
   boot.kernelModules = [ 
     "gcadapter_oc"
   ];
+#  boot.kernelParams = [
+#    "video=HDMI-1:1920x1080@60"
+#    "video=DP-2:1920x1080@144"
+#    "video=DP-3:1920x1080@60"
+#  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.networkmanager.enable = true;
@@ -50,30 +56,54 @@
   services.xserver = {
 # Enable the X11 windowing system.
     enable = true;
+    videoDrivers = [ "amdgpu" ];
     displayManager = {
-      gdm = { 
+      lightdm = { 
         enable = true;
-        wayland = true;
       };
     };
 
     desktopManager = {
-#      gnome.enable = true;
-#      plasma6.enable = true;
       xterm.enable = false;
-#      xfce = {
-#        enable = true;
-#        noDesktop = true;
-#        enableXfwm = false;
-#      };
     };
-    windowManager.i3.enable = true;
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+    #brightnessctl        # screen brightness contoller
+    #clipit               # GTK clipboard manager
+    #dmenu                # application launcher most people use
+    #flameshot            # another screenshot utility
+    #i3blocks             # another status bar
+    #pasystray            # clipboard manager i think
+    #redshift             # color temp manager (like flux)
+    dunst                 # notification manager
+    feh                   # wallpaper handler and pic viewer
+    i3lock                # default i3 screen locker
+    i3status              # gives you the default i3 status bar
+    ibus                  # input handler manager
+    #lxappearance         # appearance manager gui
+    maim                  # screenshot utility
+    networkmanagerapplet  # self explanitory
+    picom                 # compositor. aesthetic window stuff
+    polybarFull           # bar that's hard to use
+    rofi                  # run dialog (does some other stuff too)
+    xorg.setxkbmap
+    xorg.xinput
+    xss-lock
+  ];
+};
 
     # Configure keymap in X11
     xkb = {
       layout = "us";
       variant = "";
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    #gtkUsePortal = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
   };
 
   services.udev.packages = with pkgs; [ 
@@ -101,6 +131,7 @@
      # VIM setup!
      EDITOR = "vim"; 
      XSECURELOCK_PASSWORD_PROMPT = "asterisks"; 
+     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
    programs.mtr.enable = true;
    programs.gnupg.agent = {

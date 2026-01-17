@@ -61,7 +61,6 @@
     spotify
     telegram-desktop
     thunderbird
-    uwsm
     winetricks
     wireguard-tools
 #    cheese           # camera preview and taker
@@ -73,53 +72,10 @@
     ranger           # vim-like cli file explorer
     webcord
     wofi
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
-
-    # i3
-    #brightnessctl        # screen brightness contoller
-    #clipit               # GTK clipboard manager
-    #dmenu                # application launcher most people use
-    #flameshot            # another screenshot utility
-    #i3blocks             # another status bar
-    #pasystray            # clipboard manager i think
-    #redshift             # color temp manager (like flux)
-    dunst                 # notification manager
-    feh                   # wallpaper handler and pic viewer
-    i3lock                # default i3 screen locker
-    i3status              # gives you the default i3 status bar
-    ibus                  # input handler manager
-    #lxappearance         # appearance manager gui
-    maim                  # screenshot utility
-    networkmanagerapplet  # self explanitory
-    picom                 # compositor. aesthetic window stuff
-    polybarFull           # bar that's hard to use
-    rofi                  # run dialog (does some other stuff too)
-    xorg.setxkbmap
-    xorg.xinput
-    xss-lock
-
-    # hyprland only
-    hyprpaper
-    hyprshot
-
     (wineWow64Packages.full.override {
       wineRelease = "staging";
       mingwSupport = true;
     }) 
-    #(retroarch.override {
-    #  cores = with libretro; [
-    #    desmume
-    #    dolphin
-    #    genesis-plus-gx
-    #    pcsx2
-	 #    mgba
-    #    snes9x
-    #    beetle-psx-hw
-    #    nestopia
-    #  ];
-    #})
     ];
   };
 
@@ -133,21 +89,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #These are all for Plasma6/KDE
-#    kdePackages.discover         # Optional: Install if you use Flatpak or fwupd firmware update sevice
-#    kdePackages.kcalc            # Calculator
-#    kdePackages.kcharselect      # Tool to select and copy special characters from all installed fonts
-#    kdePackages.kcolorchooser    # A small utility to select a color
-#    kdePackages.kolourpaint      # Easy-to-use paint program
-#    kdePackages.ksystemlog       # KDE SystemLog Application
-#    kdePackages.sddm-kcm         # Configuration module for SDDM
-#    kdiff3                       # Compares and merges 2 or 3 files or directories
-#    kdePackages.isoimagewriter   # Optional: Program to write hybrid ISO files onto USB disks
-#    kdePackages.partitionmanager # Optional Manage the disk devices, partitions and file systems on your computer
-#    hardinfo2                    # System information and benchmarks for Linux systems
-#    haruna                       # Open source video player built with Qt/QML and libmpv
-#    wayland-utils                # Wayland utilities
-#    wl-clipboard                 # Command-line copy/paste utilities for Wayland
     exiftool
     ffmpeg
     gh
@@ -169,7 +110,7 @@
     networkmanagerapplet
     orchis-theme
     pavucontrol
-    pkgs.ffmpegthumbnailer
+    ffmpegthumbnailer
     rename
     tmux
     unrar
@@ -191,9 +132,6 @@
   programs = {
     firefox.enable = true;
     dconf.enable = true;
-    hyprland.enable = true;
-    hyprland.withUWSM = true;
-    hyprland.xwayland.enable = true;
     thunar.enable = true;
     appimage.binfmt = true;
     sway = {
@@ -213,22 +151,19 @@
         blueman
       ];
       extraSessionCommands = ''
-        # get themes working with sway...
-        # custom theming
-        QT_QPA_PLATFORMTHEME = "qt6ct";
-        CLUTTER_BACKEND = "wayland";
-        SDL_VIDEODRIVER = "wayland";
-        XDG_SESSION_TYPE = "wayland";
-        XDG_CURRENT_DESKTOP = "sway";
-        QT_QPA_PLATFORM = "wayland";
-        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-        MOZ_ENABLE_WAYLAND = "1";
-        _JAVA_AWT_WM_NONREPARENTING = "1";
-        ECORE_EVAS_ENGINE = "wayland_egl";
-        ELM_ENGINE = "wayland_egl";
-        #QT_STYLE_OVERRIDE = "adwaita-dark";
-        NIXOS_OZONE_WL = "1";
-        NIX_SHELL_PRESERVE_PROMPT= "1";
+        export QT_QPA_PLATFORMTHEME=qt6ct
+        export CLUTTER_BACKEND=wayland
+        export SDL_VIDEODRIVER=wayland
+        export XDG_SESSION_TYPE=wayland
+        export XDG_CURRENT_DESKTOP=sway
+        export QT_QPA_PLATFORM=wayland
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+        export MOZ_ENABLE_WAYLAND=1
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export ECORE_EVAS_ENGINE=wayland_egl
+        export ELM_ENGINE=wayland_egl
+        export #QT_STYLE_OVERRIDE=adwaita-dark
+        export NIXOS_OZONE_WL=1
       '';
     };
     light.enable = true;

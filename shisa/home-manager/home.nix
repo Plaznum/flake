@@ -18,7 +18,7 @@ let
 in
 {
   imports = [
-#    ../sway.nix
+#    ./sway.nix
   ];
   home.username = "pandy";
   home.homeDirectory = "/home/pandy";
@@ -42,6 +42,7 @@ in
     # '';
   };
 
+  home.sessionPath = ["~/bin"];
   home.sessionVariables = {
     EDITOR = "vim";
   };
@@ -57,6 +58,7 @@ in
     shellAliases = {
       hmswitch = "home-manager switch --flake ~/flake/shisa/home-manager/";
       rebuild = "sudo nixos-rebuild switch --flake ~/flake/shisa/#shisa";
+      bofa = "rebuild; hmswitch";
     };
   };
   programs.tmux = {
