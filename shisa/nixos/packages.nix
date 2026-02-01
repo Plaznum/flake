@@ -17,9 +17,10 @@
   (pkgs.writeShellScriptBin "Discord" ''
     exec ${pkgs.discord}/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
   '')
-#  (pkgs.writeShellScriptBin "spotify" ''
-#    exec ${pkgs.spotify}/bin/spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
-#  '')
+    (discord.override {
+      # withOpenASAR = true; # can do this here too
+      withVencord = true;
+    })
   (pkgs.wrapOBS {
     plugins = with pkgs.obs-studio-plugins; [
       wlrobs
@@ -27,16 +28,13 @@
       obs-pipewire-audio-capture
     ];
   })
-    (discord.override {
-      # withOpenASAR = true; # can do this here too
-      withVencord = true;
-    })
     alacritty
     appimage-run
     asunder           # cd reader/burner
     audacious         # audio player
     audacity          # audio recorder
     btop              # htop but cooler (?)
+    cheese           # camera preview and taker
     chromium
     deluge
     dolphin-emu
@@ -45,32 +43,31 @@
     gallery-dl        # mass image downloader
     gimp-with-plugins # picture editor
     heroic            # game launcher (GOG, Epic, Amazon)
+    kdePackages.kdenlive # video editor
+    legendary-gl     # Epic games launcher
     libreoffice       # MS Office replacement
-#    lightdm
     lmms              # digital audio workstation
     mullvad-vpn
     nom
     nvtopPackages.amd
+    osu-lazer
     pcsx2
     picard            # audio file metadata tagging
     playerctl         # media player controller
+    pokemon-colorscripts-mac
+    prismlauncher    # CHICKEN JOCKEYYY!!!
     pulseaudio        # needed for my extra audio controls
-    shellcheck        # to validate bash scripts
-    screenkey         # app that visualizes keystrokes
+    ranger           # vim-like cli file explorer
+    rare             # gui for legendary
     scdl              # soundcloud audio downloader
+    screenkey         # app that visualizes keystrokes
+    shellcheck        # to validate bash scripts
     spotify
     telegram-desktop
     thunderbird
+    webcord
     winetricks
     wireguard-tools
-#    cheese           # camera preview and taker
-    legendary-gl     # Epic games launcher
-    rare             # gui for legendary
-#    osu-lazer
-    prismlauncher    # CHICKEN JOCKEYYY!!!
-    pokemon-colorscripts-mac
-    ranger           # vim-like cli file explorer
-    webcord
     wofi
     (wineWow64Packages.full.override {
       wineRelease = "staging";
@@ -93,10 +90,11 @@
     ffmpeg
     gh
     git
-    gnome-tweaks
     gnomeExtensions.appindicator
     greetd.tuigreet
     gtk2
+    gtk3
+    gtk4
     hyfetch
     inetutils
     killall
@@ -117,9 +115,7 @@
     unzip
     usbutils
     vlc
-    waybar
     wget
-    wl-clipboard
     xclip
     xorg.xev
     xorg.xhost
@@ -127,7 +123,7 @@
     xsecurelock
     zenity
     zip
-    home-manager
+    libheif
   ];
   programs = {
     firefox.enable = true;
@@ -149,6 +145,8 @@
         glib            # so gsettings works
         nautilus
         blueman
+        waybar
+        xdg-utils
       ];
       extraSessionCommands = ''
         export QT_QPA_PLATFORMTHEME=qt6ct

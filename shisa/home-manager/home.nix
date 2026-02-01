@@ -56,7 +56,7 @@ in
       PS1='\[\e[38;5;17;48;5;177;1m\]\u@\h:\[\e[0;38;5;177;48;5;17m\]\w\\$\[\e[0m\] '
     '';
     shellAliases = {
-      hmswitch = "home-manager switch --flake ~/flake/shisa/home-manager/";
+      hmswitch = "home-manager switch --flake ~/flake/shisa/";
       rebuild = "sudo nixos-rebuild switch --flake ~/flake/shisa/#shisa";
       bofa = "rebuild; hmswitch";
     };
@@ -167,12 +167,12 @@ in
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    settings = {
-      user = {
-        name = "Plaznum";
-        email = "rycs1997@gmail.com";
-      };
-    };
+    #settings = {
+    #  user = {
+    #    name = "Plaznum";
+    #    email = "rycs1997@gmail.com";
+    #  };
+    #};
   };
   systemd.user.startServices = "sd-switch";
 }
