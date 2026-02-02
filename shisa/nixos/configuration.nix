@@ -7,6 +7,7 @@
     ./netdrives.nix
     ./packages.nix
     ./vim.nix
+    ./motd.nix
 #    ./vm.nix
   ];
   # Bootloader.
