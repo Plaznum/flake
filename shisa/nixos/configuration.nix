@@ -7,6 +7,7 @@
     ./netdrives.nix
     ./packages.nix
     ./vim.nix
+    ./motd.nix
 #    ./vm.nix
   ];
   # Bootloader.
@@ -21,10 +22,16 @@
     config.boot.kernelPackages.gcadapter-oc-kmod
   ];
 
+  boot.initrd.kernelModules = [ "amdgpu" ];
   # to autoload at boot:
   boot.kernelModules = [ 
     "gcadapter_oc"
   ];
+#  boot.kernelParams = [
+#    "video=HDMI-1:1920x1080@60"
+#    "video=DP-2:1920x1080@144"
+#    "video=DP-3:1920x1080@60"
+#  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.networkmanager.enable = true;
@@ -50,29 +57,64 @@
   services.xserver = {
 # Enable the X11 windowing system.
     enable = true;
+    videoDrivers = [ "amdgpu" ];
     displayManager = {
-      gdm = { 
+      lightdm = { 
         enable = true;
-        wayland = true;
       };
     };
 
     desktopManager = {
-#      gnome.enable = true;
-#      plasma6.enable = true;
       xterm.enable = false;
-#      xfce = {
-#        enable = true;
-#        noDesktop = true;
-#        enableXfwm = false;
-#      };
     };
-    windowManager.i3.enable = true;
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        #brightnessctl        # screen brightness contoller
+        #clipit               # GTK clipboard manager
+        #dmenu                # application launcher most people use
+        #flameshot            # another screenshot utility
+        #i3blocks             # another status bar
+        #pasystray            # clipboard manager i think
+        #redshift             # color temp manager (like flux)
+        dunst                 # notification manager
+        feh                   # wallpaper handler and pic viewer
+        i3lock                # default i3 screen locker
+        i3status              # gives you the default i3 status bar
+        ibus                  # input handler manager
+        #lxappearance         # appearance manager gui
+        maim                  # screenshot utility
+        networkmanagerapplet  # self explanitory
+        picom                 # compositor. aesthetic window stuff
+        polybarFull           # bar that's hard to use
+        rofi                  # run dialog (does some other stuff too)
+        xorg.setxkbmap
+        xorg.xinput
+        xss-lock
+      ];
+    };
 
     # Configure keymap in X11
     xkb = {
       layout = "us";
       variant = "";
+    };
+  };
+
+  xdg.autostart.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
+    config = {
+      sway = {
+        default = ["gtk"];
+        "org.freedesktop.impl.portal.OpenURI" = "gtk";
+        "org.freedesktop.impl.portal.Screencast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+        "org.freedesktop.impl.portal.GlobalShortcuts" = "gtk";
+      };
     };
   };
 
@@ -101,23 +143,7 @@
      # VIM setup!
      EDITOR = "vim"; 
      XSECURELOCK_PASSWORD_PROMPT = "asterisks"; 
-
-     # get themes working with sway...
-     # custom theming
-     QT_QPA_PLATFORMTHEME = "qt6ct";
-     CLUTTER_BACKEND = "wayland";
-     SDL_VIDEODRIVER = "wayland";
-     XDG_SESSION_TYPE = "wayland";
-     XDG_CURRENT_DESKTOP = "sway";
-     QT_QPA_PLATFORM = "wayland";
-     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-     MOZ_ENABLE_WAYLAND = "1";
-     _JAVA_AWT_WM_NONREPARENTING = "1";
-     ECORE_EVAS_ENGINE = "wayland_egl";
-     ELM_ENGINE = "wayland_egl";
-     #QT_STYLE_OVERRIDE = "adwaita-dark";
-     NIXOS_OZONE_WL = "1";
-     NIX_SHELL_PRESERVE_PROMPT= "1";
+     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
    programs.mtr.enable = true;
    programs.gnupg.agent = {

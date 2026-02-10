@@ -6,7 +6,20 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  ];
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
@@ -15,18 +28,18 @@
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/15f675c7-bf42-48b8-8f8e-d06acc052372";
-      fsType = "ext4";
-    };
+    fsType = "ext4";
+  };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/08C9-EB5D";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
+  };
   fileSystems."/mnt/BigSSD" =
     { device = "/dev/disk/by-uuid/75d3967b-079d-4363-ae25-e95eb98e148b";
-      fsType = "ext4";
-    };
+    fsType = "ext4";
+  };
 
   swapDevices = [ ];
 
