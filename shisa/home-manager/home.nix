@@ -18,7 +18,7 @@ let
 in
 {
   imports = [
-#    ./sway.nix
+    ./swayfx.nix
   ];
   home.username = "pandy";
   home.homeDirectory = "/home/pandy";
@@ -60,6 +60,9 @@ in
       hmswitch = "home-manager switch --flake ~/flake/shisa/";
       rebuild = "sudo nixos-rebuild switch --flake ~/flake/shisa/#shisa";
       bofa = "rebuild; hmswitch";
+      la = "ls -lrta";
+      cmit = "git commit -m";
+      cvs = "git";
     };
   };
   programs.tmux = {

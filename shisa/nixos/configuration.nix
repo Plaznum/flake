@@ -61,6 +61,8 @@
     displayManager = {
       lightdm = { 
         enable = true;
+        greeters.gtk.enable = true;
+        background = "/etc/nixos/background/i90bLZFzoz1Ho.png";
       };
     };
 
