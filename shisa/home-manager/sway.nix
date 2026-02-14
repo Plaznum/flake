@@ -7,7 +7,7 @@
 
     window = {
       border = 3;
-      hideEdgeBorders = "both";
+#      hideEdgeBorders = "both";
       commands = [
       # Force use border on all windows
       { command = "border pixel 3"; criteria = { title = ".*"; }; }
@@ -21,12 +21,12 @@
       pos = "1080 700";
       allow_tearing = "yes";
     };
-    "DP-2" = {
+    "DP-3" = {
       bg = "/home/pandy/Pictures/wallpaper/wallhaven-lmq522.jpg fill";
       pos = "0 0";
       transform = "270";
     };
-    "DP-3" = {
+    "DP-2" = {
       bg = "/home/pandy/Pictures/20250624_160756.jpg fill";
       mode = "1920x1080@144Hz";
       pos = "3000 100";
@@ -76,40 +76,46 @@
 #      }
 #    ];
 
-input = {
-  "*" = {
-  scroll_method = "on_button_down";
-  natural_scroll = "enabled";
-  tap = "enabled";
-  middle_emulation = "enabled";
-  xkb_layout = "us,ru";
-  xkb_options = "ctrl:nocaps,grp:toggle,grp_led:caps";
-  };
-  };
+#  input = {
+#     "*" = {
+#        scroll_method = "on_button_down";
+#        natural_scroll = "enabled";
+#        tap = "enabled";
+#        middle_emulation = "enabled";
+#        xkb_layout = "us,ru";
+#        xkb_options = "ctrl:nocaps,grp:toggle,grp_led:caps";
+#     };
+#  };
 
   ## template = { border = "#"; background = "#"; text = "#"; indicator = "#"; childBorder = "#"; };
   ## Colors from https://github.com/unix121/i3wm-themer/blob/master/themes/001.yml
   colors = {
-    background ="#1E272B";
+#    background ="#1E272B";
 
-    focused =         { border = "#EAD49B"; background = "#1E272B"; text = "#EAD49B"; indicator = "#9D6A47"; childBorder = "#9D6A47"; };
-    unfocused =       { border = "#EAD49B"; background = "#1E272B"; text = "#EAD49B"; indicator = "#78824B"; childBorder = "#78824B"; };
-    focusedInactive = { border = "#EAD49B"; background = "#1E272B"; text = "#EAD49B"; indicator = "#78824B"; childBorder = "#78824B"; };
-    urgent =          { border = "#EAD49B"; background = "#1E272B"; text = "#EAD49B"; indicator = "#78824B"; childBorder = "#78824B"; };
-    placeholder =     { border = "#EAD49B"; background = "#1E272B"; text = "#EAD49B"; indicator = "#78824B"; childBorder = "#78824B"; };
+    focused =         { border = "#5fd7ff"; background = "#5fd7ff"; text = "#302d30"; indicator = "#0000ff"; childBorder = "#5fd7ff";};
+    unfocused =       { border = "#004557"; background = "#004557"; text = "#a1c9cc"; indicator = "#0000ff"; childBorder = "#004557";};
+    focusedInactive = { border = "#004557"; background = "#004557"; text = "#a1c9cc"; indicator = "#0000ff"; childBorder = "#004557";};
+    urgent =          { border = "#E53935"; background = "#E53935"; text = "#302d30"; indicator = "#0000ff"; childBorder = "#E53935";};
+    placeholder =     { border = "#EAD49B"; background = "#1E272B"; text = "#302d30"; indicator = "#78824B"; childBorder = "#EAD49B";};
   };
 
   bindkeysToCode = true;
   keybindings =
     let
-      mod = modifier;
+      mod = "Mod4";
       mod1 = "Mod1";
       mod2 = "Mod2";
-      workspaces = with lib; listToAttrs (
-        (map (i: nameValuePair "${mod}+${i}" "workspace number ${i}") (map toString (range 0 9))) ++
-        (map (i: nameValuePair "${mod}+Shift+${i}" "move container to workspace number ${i}") (map toString (range 0 9)))
-        );
-    in lib.mkDefault ({
+    in {
+      "${mod}+1"         = "workspace number 1";
+      "${mod}+2"         = "workspace number 2";
+      "${mod}+3"         = "workspace number 3";
+      "${mod}+4"         = "workspace number 4";
+      "${mod}+5"         = "workspace number 5";
+      "${mod}+6"         = "workspace number 6";
+      "${mod}+7"         = "workspace number 7";
+      "${mod}+8"         = "workspace number 8";
+      "${mod}+9"         = "workspace number 9";
+      "${mod}+0"         = "workspace number 10";
       "${mod}+${mod1}+1" = "workspace number 11";
       "${mod}+${mod1}+2" = "workspace number 12";
       "${mod}+${mod1}+3" = "workspace number 13";
@@ -121,6 +127,16 @@ input = {
       "${mod}+${mod1}+9" = "workspace number 19";
       "${mod}+${mod1}+0" = "workspace number 20";
 
+      "${mod}+Shift+1"         = "move container to workspace number 1";
+      "${mod}+Shift+2"         = "move container to workspace number 2";
+      "${mod}+Shift+3"         = "move container to workspace number 3";
+      "${mod}+Shift+4"         = "move container to workspace number 4";
+      "${mod}+Shift+5"         = "move container to workspace number 5";
+      "${mod}+Shift+6"         = "move container to workspace number 6";
+      "${mod}+Shift+7"         = "move container to workspace number 7";
+      "${mod}+Shift+8"         = "move container to workspace number 8";
+      "${mod}+Shift+9"         = "move container to workspace number 9";
+      "${mod}+Shift+0"         = "move container to workspace number 10";
       "${mod}+${mod1}+Shift+1" = "move container to workspace number 11";
       "${mod}+${mod1}+Shift+2" = "move container to workspace number 12";
       "${mod}+${mod1}+Shift+3" = "move container to workspace number 13";
@@ -191,10 +207,29 @@ input = {
       "${mod}+Shift+minus" = "gaps inner current minus 6";
 
       "${mod}+f" = "fullscreen toggle";
-    } // workspaces);
-
-    bars = [
-      { command = "waybar -c ~/.config/waybar/configsway & waybar -c ~/.config/waybar/configswaysub"; }
+    };
+    workspaceOutputAssign = [
+       { workspace = "1"; output = "DP-3"; }
+       { workspace = "10"; output = "DP-3"; }
+       { workspace = "11"; output = "DP-3"; }
+       { workspace = "12"; output = "DP-3"; }
+       { workspace = "19"; output = "DP-3"; }
+       { workspace = "20"; output = "DP-3"; }
+       { workspace = "2"; output = "HDMI-A-1"; }
+       { workspace = "4"; output = "HDMI-A-1"; }
+       { workspace = "7"; output = "HDMI-A-1"; }
+       { workspace = "9"; output = "HDMI-A-1"; }
+       { workspace = "3"; output = "DP-2"; }
+       { workspace = "5"; output = "DP-2"; }
+       { workspace = "6"; output = "DP-2"; }
+       { workspace = "8"; output = "DP-2"; }
     ];
+    bars = [];
   };
+  wayland.windowManager.sway.extraConfig = ''
+     exec --no-startup-id nm-applet
+     exec --no-startup-id blueman-applet
+     exec --no-startup-id waybar -c ~/.config/waybar/configsway & waybar -c ~/.config/waybar/configswaysub
+  '';
+  wayland.windowManager.sway.checkConfig = false;
 }

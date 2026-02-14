@@ -48,7 +48,7 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  services.displayManager.defaultSession = "sway";
+#  services.displayManager.defaultSession = "sway";
   #services.displayManager.ly.enable = true;
   #services.displayManager.sddm.wayland.enable = true;
   #services.displayManager.sddm.enable = true;

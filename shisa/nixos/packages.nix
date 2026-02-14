@@ -36,6 +36,7 @@
     btop              # htop but cooler (?)
     cheese           # camera preview and taker
     chromium
+    jdk21_headless
     deluge
     dolphin-emu
     efibootmgr        # to modify GRUB
@@ -59,6 +60,7 @@
     pulseaudio        # needed for my extra audio controls
     ranger           # vim-like cli file explorer
     rare             # gui for legendary
+    retroarch-full
     scdl              # soundcloud audio downloader
     screenkey         # app that visualizes keystrokes
     shellcheck        # to validate bash scripts
@@ -69,6 +71,19 @@
     winetricks
     wireguard-tools
     wofi
+#sway
+        grim            # screenshot functionality
+        libappindicator # enable tray maybe
+        slurp           # screenshot functionality
+        swaylock        # i3lock
+        wl-clipboard    # wl-copy and wl-paste for copy/paste from stdin / stdout
+        mako            # notification system developed by swaywm maintainer
+        wev
+        glib            # so gsettings works
+        nautilus
+        blueman
+        waybar
+        xdg-utils
     (wineWow64Packages.full.override {
       wineRelease = "staging";
       mingwSupport = true;
@@ -91,7 +106,7 @@
     gh
     git
     gnomeExtensions.appindicator
-    greetd.tuigreet
+    tuigreet
     gtk2
     gtk3
     gtk4
@@ -104,8 +119,8 @@
     mplayer
     mpv
     ncftp
-    neovim
     networkmanagerapplet
+    nmap
     orchis-theme
     pavucontrol
     ffmpegthumbnailer
@@ -134,20 +149,20 @@
       enable = true;
       xwayland.enable = true;
       wrapperFeatures.gtk = true;
-      extraPackages = with pkgs; [
-        grim            # screenshot functionality
-        libappindicator # enable tray maybe
-        slurp           # screenshot functionality
-        swaylock        # i3lock
-        wl-clipboard    # wl-copy and wl-paste for copy/paste from stdin / stdout
-        mako            # notification system developed by swaywm maintainer
-        wev
-        glib            # so gsettings works
-        nautilus
-        blueman
-        waybar
-        xdg-utils
-      ];
+#      extraPackages = with pkgs; [
+#        grim            # screenshot functionality
+#        libappindicator # enable tray maybe
+#        slurp           # screenshot functionality
+#        swaylock        # i3lock
+#        wl-clipboard    # wl-copy and wl-paste for copy/paste from stdin / stdout
+#        mako            # notification system developed by swaywm maintainer
+#        wev
+#        glib            # so gsettings works
+#        nautilus
+#        blueman
+#        waybar
+#        xdg-utils
+#      ];
       extraSessionCommands = ''
         export QT_QPA_PLATFORMTHEME=qt6ct
         export CLUTTER_BACKEND=wayland
