@@ -5,7 +5,7 @@
     package = pkgs.swayfx;
 
   # Needed to build without errors.
-  checkConfig = false;
+#  checkConfig = false;
 
   # SwayFX options must be configured through extraConfig.
   extraConfig = ''

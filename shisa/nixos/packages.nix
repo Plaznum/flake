@@ -65,6 +65,7 @@
     screenkey         # app that visualizes keystrokes
     shellcheck        # to validate bash scripts
     spotify
+    swayfx
     telegram-desktop
     thunderbird
     webcord

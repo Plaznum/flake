@@ -23,7 +23,7 @@ in
   home.username = "pandy";
   home.homeDirectory = "/home/pandy";
 
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 
   home.packages = [
     pkgs.tmux

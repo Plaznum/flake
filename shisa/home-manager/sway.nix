@@ -8,10 +8,17 @@
     window = {
       border = 3;
 #      hideEdgeBorders = "both";
-      commands = [
+commands = [
       # Force use border on all windows
       { command = "border pixel 3"; criteria = { title = ".*"; }; }
     ];
+  };
+  gaps = {
+    inner = 2;
+    outer = 3;
+    bottom = 2;
+    horizontal = 5;
+    vertical = 5;
   };
 
   output = {
@@ -92,11 +99,11 @@
   colors = {
 #    background ="#1E272B";
 
-    focused =         { border = "#5fd7ff"; background = "#5fd7ff"; text = "#302d30"; indicator = "#0000ff"; childBorder = "#5fd7ff";};
-    unfocused =       { border = "#004557"; background = "#004557"; text = "#a1c9cc"; indicator = "#0000ff"; childBorder = "#004557";};
-    focusedInactive = { border = "#004557"; background = "#004557"; text = "#a1c9cc"; indicator = "#0000ff"; childBorder = "#004557";};
-    urgent =          { border = "#E53935"; background = "#E53935"; text = "#302d30"; indicator = "#0000ff"; childBorder = "#E53935";};
-    placeholder =     { border = "#EAD49B"; background = "#1E272B"; text = "#302d30"; indicator = "#78824B"; childBorder = "#EAD49B";};
+focused =         { border = "#5fd7ff"; background = "#5fd7ff"; text = "#302d30"; indicator = "#0000ff"; childBorder = "#5fd7ff";};
+unfocused =       { border = "#004557"; background = "#004557"; text = "#a1c9cc"; indicator = "#0000ff"; childBorder = "#004557";};
+focusedInactive = { border = "#004557"; background = "#004557"; text = "#a1c9cc"; indicator = "#0000ff"; childBorder = "#004557";};
+urgent =          { border = "#E53935"; background = "#E53935"; text = "#302d30"; indicator = "#0000ff"; childBorder = "#E53935";};
+placeholder =     { border = "#EAD49B"; background = "#1E272B"; text = "#302d30"; indicator = "#78824B"; childBorder = "#EAD49B";};
   };
 
   bindkeysToCode = true;
@@ -209,20 +216,20 @@
       "${mod}+f" = "fullscreen toggle";
     };
     workspaceOutputAssign = [
-       { workspace = "1"; output = "DP-3"; }
-       { workspace = "10"; output = "DP-3"; }
-       { workspace = "11"; output = "DP-3"; }
-       { workspace = "12"; output = "DP-3"; }
-       { workspace = "19"; output = "DP-3"; }
-       { workspace = "20"; output = "DP-3"; }
-       { workspace = "2"; output = "HDMI-A-1"; }
-       { workspace = "4"; output = "HDMI-A-1"; }
-       { workspace = "7"; output = "HDMI-A-1"; }
-       { workspace = "9"; output = "HDMI-A-1"; }
-       { workspace = "3"; output = "DP-2"; }
-       { workspace = "5"; output = "DP-2"; }
-       { workspace = "6"; output = "DP-2"; }
-       { workspace = "8"; output = "DP-2"; }
+      { workspace = "1"; output = "DP-3"; }
+      { workspace = "10"; output = "DP-3"; }
+      { workspace = "11"; output = "DP-3"; }
+      { workspace = "12"; output = "DP-3"; }
+      { workspace = "19"; output = "DP-3"; }
+      { workspace = "20"; output = "DP-3"; }
+      { workspace = "2"; output = "HDMI-A-1"; }
+      { workspace = "4"; output = "HDMI-A-1"; }
+      { workspace = "7"; output = "HDMI-A-1"; }
+      { workspace = "9"; output = "HDMI-A-1"; }
+      { workspace = "3"; output = "DP-2"; }
+      { workspace = "5"; output = "DP-2"; }
+      { workspace = "6"; output = "DP-2"; }
+      { workspace = "8"; output = "DP-2"; }
     ];
     bars = [];
   };
