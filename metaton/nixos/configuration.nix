@@ -8,7 +8,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware.nix
     ./hosts.nix
-    ./neovim.nix
+#    ./neovim.nix
     ./netdrives.nix
     ./packages.nix
   ];
@@ -51,7 +51,6 @@
   # xfce+i3
   # xfce
   # none+i3
-  # hyprland
   services.displayManager.defaultSession = "none+i3";
 
 #  security.pam.services.gdm.enableGnomeKeyring = true;
@@ -122,21 +121,7 @@
    environment.variables = { 
      EDITOR = "vim"; 
      XSECURELOCK_PASSWORD_PROMPT = "asterisks";
-     # get themes working with sway...
-#     QT_QPA_PLATFORMTHEME = "qt6ct";
-#     CLUTTER_BACKEND = "wayland";
-#     SDL_VIDEODRIVER = "wayland";
-#     XDG_SESSION_TYPE = "wayland";
-#     XDG_CURRENT_DESKTOP = "sway";
-#     QT_QPA_PLATFORM = "wayland";
-#     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-#     MOZ_ENABLE_WAYLAND = "1";
-#     _JAVA_AWT_WM_NONREPARENTING = "1";
-#     ECORE_EVAS_ENGINE = "wayland_egl";
-#     ELM_ENGINE = "wayland_egl";
-#     #QT_STYLE_OVERRIDE = "adwaita-dark";
-#     NIXOS_OZONE_WL = "1";
-#     NIX_SHELL_PRESERVE_PROMPT= "1";
+     NIX_SHELL_PRESERVE_PROMPT= "1";
    };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

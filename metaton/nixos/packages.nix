@@ -93,6 +93,22 @@
         nautilus
         blueman
       ];
+      extraSessionCommands = 
+        ''
+        export QT_QPA_PLATFORMTHEME = "qt6ct";
+      export CLUTTER_BACKEND = "wayland";
+      export SDL_VIDEODRIVER = "wayland";
+      export XDG_SESSION_TYPE = "wayland";
+      export XDG_CURRENT_DESKTOP = "sway";
+      export QT_QPA_PLATFORM = "wayland";
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      export MOZ_ENABLE_WAYLAND = "1";
+      export _JAVA_AWT_WM_NONREPARENTING = "1";
+      export ECORE_EVAS_ENGINE = "wayland_egl";
+      export ELM_ENGINE = "wayland_egl";
+      export #QT_STYLE_OVERRIDE = "adwaita-dark";
+      export NIXOS_OZONE_WL = "1";
+      '';
     };
     light.enable = true;
     steam = {
