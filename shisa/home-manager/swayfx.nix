@@ -10,7 +10,7 @@
   # SwayFX options must be configured through extraConfig.
   extraConfig = ''
     shadows enable
-    corner_radius 11
+    corner_radius 1
     blur_radius 7
     blur_passes 2
   '';

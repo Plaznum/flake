@@ -170,8 +170,9 @@ placeholder =     { border = "#EAD49B"; background = "#1E272B"; text = "#302d30"
       "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
       "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
 
-      "${mod}+p" = "exec arandr";
       "${mod}+n" = "exec thunar";
+      "${mod}+Shift+s" = "exec ~/.config/sway/scapscap";
+      "${mod}+Print" = "exec ~/.config/sway/scapscap";
 
       "${mod}+space" = "focus mode_toggle";
       "${mod}+Shift+space" = "floating toggle";
