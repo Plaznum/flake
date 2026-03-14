@@ -61,13 +61,18 @@
     displayManager = {
       lightdm = { 
         enable = true;
-        greeters.gtk.enable = true;
+        greeters.gtk = {
+          enable = true;
+          theme.name = "Orchis-Teal-Dark-Compact";
+          iconTheme.name = "Orchis-Teal-Dark-Compact";
+          cursorTheme.name = "Orchis-Teal-Dark-Compact";
+        };
         background = "/etc/nixos/background/i90bLZFzoz1Ho.png";
       };
     };
 
     desktopManager = {
-      xterm.enable = false;
+      plasma6.enable = true;
     };
     windowManager.i3 = {
       enable = true;

@@ -73,18 +73,28 @@
     wireguard-tools
     wofi
 #sway
-        grim            # screenshot functionality
-        libappindicator # enable tray maybe
-        slurp           # screenshot functionality
-        swaylock        # i3lock
-        wl-clipboard    # wl-copy and wl-paste for copy/paste from stdin / stdout
-        mako            # notification system developed by swaywm maintainer
-        wev
-        glib            # so gsettings works
-        nautilus
-        blueman
-        waybar
-        xdg-utils
+    grim            # screenshot functionality
+    libappindicator # enable tray maybe
+    slurp           # screenshot functionality
+    swaylock        # i3lock
+    wl-clipboard    # wl-copy and wl-paste for copy/paste from stdin / stdout
+    mako            # notification system developed by swaywm maintainer
+    wev
+    glib            # so gsettings works
+    nautilus
+    blueman
+    waybar
+    xdg-utils
+    wayland-utils
+#kde
+    kdePackages.kcalc # Calculator
+    kdePackages.kcharselect # Character map
+    kdePackages.kclock # Clock app
+    kdePackages.kcolorchooser # Color picker
+    kdePackages.kolourpaint # Simple paint program
+    kdePackages.ksystemlog # System log viewer
+    kdiff3 # File/directory comparison tool
+    hardinfo2 # System benchmarks and hardware info
     (wineWow64Packages.full.override {
       wineRelease = "staging";
       mingwSupport = true;
@@ -150,7 +160,7 @@
       enable = true;
       xwayland.enable = true;
       wrapperFeatures.gtk = true;
-#      extraPackages = with pkgs; [
+      extraPackages = with pkgs; [
 #        grim            # screenshot functionality
 #        libappindicator # enable tray maybe
 #        slurp           # screenshot functionality
@@ -163,7 +173,7 @@
 #        blueman
 #        waybar
 #        xdg-utils
-#      ];
+      ];
       extraSessionCommands = ''
         export QT_QPA_PLATFORMTHEME=qt6ct
         export CLUTTER_BACKEND=wayland

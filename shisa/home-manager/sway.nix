@@ -15,10 +15,10 @@ commands = [
   };
   gaps = {
     inner = 2;
-    outer = 3;
+    outer = 2;
     bottom = 2;
-    horizontal = 5;
-    vertical = 5;
+    horizontal = 3;
+    vertical = 3;
   };
 
   output = {
