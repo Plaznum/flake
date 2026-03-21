@@ -18,8 +18,6 @@
       inherit pkgs;
       modules = [
         ./home-manager/home.nix
-        ./home-manager/neovim.nix
-        ./home-manager/sway.nix
       ];
     };
   };
